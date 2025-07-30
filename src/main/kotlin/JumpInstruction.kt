@@ -1,0 +1,15 @@
+package emulator.instructions
+
+import emulator.Memory
+import emulator.Registers
+import emulator.Screen
+import emulator.Keyboard
+
+class JumpInstruction(byte1: Byte, byte2: Byte) : Instruction(byte1, byte2) {
+    override fun execute(registers: Registers, memory: Memory, screen: Screen, keyboard: Keyboard) {
+        val address = getAddress()
+        registers.setPC(address)
+    }
+
+    override fun shouldIncrementPC(): Boolean = false
+}
