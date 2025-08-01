@@ -21,6 +21,10 @@ class Memory {
         }
     }
 
+    fun readInstruction(address: Int): Byte {
+        return rom[address]
+    }
+
     fun loadROM(bytes: ByteArray) {
         bytes.copyInto(rom, 0, 0, minOf(bytes.size, 4096))
     }
