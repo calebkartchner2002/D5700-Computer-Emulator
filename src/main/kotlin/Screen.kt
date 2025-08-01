@@ -1,30 +1,29 @@
 package emulator
 
 class Screen {
-    private val buffer = Array(8) { CharArray(8) { ' ' } }
+    private val frameBuffer = ByteArray(64) { ' '.code.toByte() }
 
-    fun draw(char: Char, row: Int, col: Int) {
+    fun writeToFrameBuffer(asciiValue: Byte, row: Int, col: Int) {
         if (row !in 0..7 || col !in 0..7) {
             throw IllegalArgumentException("Invalid screen coordinates")
         }
-        buffer[row][col] = char
+        val address = row * 8 + col
+        frameBuffer[address] = asciiValue
     }
 
     fun clear() {
-        for (row in 0..7) {
-            for (col in 0..7) {
-                buffer[row][col] = ' '
-            }
-        }
+        frameBuffer.fill(' '.code.toByte())
     }
 
     fun render() {
-        print("\u001b[2J\u001b[H")
+        print("\u001b[H\u001b[2J")
         println("╔════════╗")
         for (row in 0..7) {
             print("║")
             for (col in 0..7) {
-                print(buffer[row][col])
+                val address = row * 8 + col
+                val char = (frameBuffer[address].toInt() and 0xFF).toChar()
+                print(char)
             }
             println("║")
         }
@@ -35,6 +34,14 @@ class Screen {
         if (row !in 0..7 || col !in 0..7) {
             throw IllegalArgumentException("Invalid screen coordinates")
         }
-        return buffer[row][col]
+        val address = row * 8 + col
+        return (frameBuffer[address].toInt() and 0xFF).toChar()
+    }
+
+    fun readFrameBuffer(address: Int): Byte {
+        if (address !in 0..63) {
+            throw IllegalArgumentException("Invalid frame buffer address")
+        }
+        return frameBuffer[address]
     }
 }

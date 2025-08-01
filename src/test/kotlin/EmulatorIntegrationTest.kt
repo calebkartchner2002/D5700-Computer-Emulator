@@ -84,11 +84,9 @@ class EmulatorIntegrationTest {
         val keyboard = Keyboard()
 
         registers.general[0] = 'X'.code.toByte()
-        registers.general[1] = 3
-        registers.general[2] = 4
 
         val factory = emulator.instructions.InstructionFactory()
-        val drawInstruction = factory.createInstruction(0xF0.toByte(), 0x12.toByte())
+        val drawInstruction = factory.createInstruction(0xF0.toByte(), 0x34.toByte())
 
         drawInstruction?.execute(registers, memory, screen, keyboard)
 
