@@ -19,10 +19,8 @@ class IOInstructionTest {
     fun testDrawInstruction() {
         val setup = setup()
         setup.registers.general[1] = 'A'.code.toByte()
-        setup.registers.general[2] = 3
-        setup.registers.general[3] = 5
 
-        val instruction = DrawInstruction(0xF1.toByte(), 0x23.toByte())
+        val instruction = DrawInstruction(0xF1.toByte(), 0x35.toByte())
         instruction.execute(setup.registers, setup.memory, setup.screen, setup.keyboard)
 
         assertEquals('A', setup.screen.getChar(3, 5))

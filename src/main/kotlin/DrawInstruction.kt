@@ -8,7 +8,7 @@ import emulator.Keyboard
 class DrawInstruction(byte1: Byte, byte2: Byte) : Instruction(byte1, byte2) {
     override fun execute(registers: Registers, memory: Memory, screen: Screen, keyboard: Keyboard) {
         val charReg = getRegisterX()
-        val row = (byte2.toInt() and 0xF0) ushr 4
+        val row = (byte2.toInt() and 0xF0) shr 4
         val col = byte2.toInt() and 0x0F
 
         val charValue = registers.general[charReg]

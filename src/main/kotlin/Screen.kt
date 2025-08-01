@@ -1,21 +1,28 @@
 package emulator
 
 class Screen {
-    private val frameBuffer = ByteArray(64) { ' '.code.toByte() }
+    private val frameBuffer = ByteArray(64) { '0'.code.toByte() }
+    private var hasChanged = false
 
     fun writeToFrameBuffer(asciiValue: Byte, row: Int, col: Int) {
         if (row !in 0..7 || col !in 0..7) {
             throw IllegalArgumentException("Invalid screen coordinates")
         }
         val address = row * 8 + col
-        frameBuffer[address] = asciiValue
+        if (frameBuffer[address] != asciiValue) {
+            frameBuffer[address] = asciiValue
+            hasChanged = true
+        }
     }
 
     fun clear() {
-        frameBuffer.fill(' '.code.toByte())
+        frameBuffer.fill('0'.code.toByte())
+        hasChanged = true
     }
 
     fun render() {
+        if (!hasChanged) return
+
         print("\u001b[H\u001b[2J")
         println("╔════════╗")
         for (row in 0..7) {
@@ -28,6 +35,8 @@ class Screen {
             println("║")
         }
         println("╚════════╝")
+
+        hasChanged = false
     }
 
     fun getChar(row: Int, col: Int): Char {

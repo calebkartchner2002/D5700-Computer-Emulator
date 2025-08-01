@@ -40,8 +40,8 @@ class ScreenTest {
 
         screen.clear()
 
-        assertEquals(' ', screen.getChar(3, 3))
-        assertEquals(' ', screen.getChar(5, 5))
+        assertEquals('0', screen.getChar(3, 3))
+        assertEquals('0', screen.getChar(5, 5))
     }
 
     @Test
@@ -50,7 +50,7 @@ class ScreenTest {
 
         for (row in 0..7) {
             for (col in 0..7) {
-                assertEquals(' ', screen.getChar(row, col))
+                assertEquals('0', screen.getChar(row, col))
             }
         }
     }
