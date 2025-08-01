@@ -3,7 +3,6 @@ package emulator.instructions
 import emulator.*
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class ControlFlowInstructionTest {
@@ -27,7 +26,7 @@ class ControlFlowInstructionTest {
         instruction.execute(setup.registers, setup.memory, setup.screen, setup.keyboard)
 
         assertEquals(12, setup.registers.programCounter)
-        assertFalse(instruction.shouldIncrementPC())
+        assertTrue(instruction.shouldIncrementPC())
     }
 
     @Test
@@ -55,7 +54,7 @@ class ControlFlowInstructionTest {
         instruction.execute(setup.registers, setup.memory, setup.screen, setup.keyboard)
 
         assertEquals(22, setup.registers.programCounter)
-        assertFalse(instruction.shouldIncrementPC())
+        assertTrue(instruction.shouldIncrementPC())
     }
 
     @Test

@@ -67,9 +67,11 @@ class CPU(
                 return
             }
 
+            val oldPC = registers.programCounter
             instruction.execute(registers, memory, screen, keyboard)
 
-            if (instruction.shouldIncrementPC()) {
+            // Only increment PC if the instruction didn't change it
+            if (registers.programCounter == oldPC && instruction.shouldIncrementPC()) {
                 registers.incrementPC()
             }
 

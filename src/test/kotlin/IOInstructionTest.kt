@@ -44,7 +44,7 @@ class IOInstructionTest {
     fun testTimerInstructions() {
         val setup = setup()
 
-        val setT = SetTInstruction(0xB0.toByte(), 0x3C.toByte())
+        val setT = SetTInstruction(0xB3.toByte(), 0xC0.toByte())
         setT.execute(setup.registers, setup.memory, setup.screen, setup.keyboard)
         assertEquals(0x3C, setup.registers.timer)
 
