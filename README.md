@@ -1,5 +1,7 @@
 # D5700-Computer-Emulator
-Design Patterns Implemented
+
+
+## Design Patterns Implemented
 
 ### Singleton Pattern:
 
