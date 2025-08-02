@@ -3,13 +3,13 @@ package emulator
 class Registers {
     val general = ByteArray(8)
     var programCounter: Int = 0
-    var timer: Byte = 0
+    val timer = java.util.concurrent.atomic.AtomicInteger(0)
     var address: Int = 0
 
     fun reset() {
         general.fill(0)
         programCounter = 0
-        timer = 0
+        timer.set(0)
         address = 0
     }
 

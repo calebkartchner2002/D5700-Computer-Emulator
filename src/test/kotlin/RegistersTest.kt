@@ -8,10 +8,10 @@ class RegistersTest {
     @Test
     fun testGeneralRegisters() {
         val registers = Registers()
-        registers.general[0] = 0x42
+        registers.general[0] = 0x42.toByte()
         registers.general[7] = 0x7F.toByte()
 
-        assertEquals(0x42, registers.general[0])
+        assertEquals(0x42.toByte(), registers.general[0])
         assertEquals(0x7F.toByte(), registers.general[7])
     }
 
@@ -46,8 +46,8 @@ class RegistersTest {
     fun testSpecialRegisters() {
         val registers = Registers()
 
-        registers.timer = 0x3C
-        assertEquals(0x3C, registers.timer)
+        registers.timer.set(0x3C)
+        assertEquals(0x3C, registers.timer.get())
 
         registers.address = 0x1234
         assertEquals(0x1234, registers.address)
@@ -56,16 +56,16 @@ class RegistersTest {
     @Test
     fun testReset() {
         val registers = Registers()
-        registers.general[3] = 0x55
+        registers.general[3] = 0x55.toByte()
         registers.programCounter = 100
-        registers.timer = 0x20
-        registers.address = 0x500
+        registers.timer.set(0x20)
+        registers.address = 0x0500
 
         registers.reset()
 
-        assertEquals(0, registers.general[3])
+        assertEquals(0x00.toByte(), registers.general[3])
         assertEquals(0, registers.programCounter)
-        assertEquals(0, registers.timer)
+        assertEquals(0, registers.timer.get())
         assertEquals(0, registers.address)
     }
 }

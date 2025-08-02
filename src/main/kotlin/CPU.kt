@@ -84,10 +84,9 @@ class CPU(
     }
 
     private fun decrementTimer() {
-        if (registers.timer > 0) {
-            registers.timer = (registers.timer - 1).toByte()
-        }
+        registers.timer.getAndUpdate { t -> if (t > 0) t - 1 else t }
     }
+
 
     fun waitForCompletion() {
         try {
