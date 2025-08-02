@@ -67,6 +67,18 @@ class CPU(
                 return
             }
 
+//            println(
+//                "[CPU] pc=%04X op=%02X%02X T=%d  V0=%02X V1=%02X V2=%02X V3=%02X".format(
+//                    registers.programCounter,
+//                    byte1.toInt() and 0xFF, byte2.toInt() and 0xFF,
+//                    registers.timer.get(),
+//                    registers.general[0].toInt() and 0xFF,
+//                    registers.general[1].toInt() and 0xFF,
+//                    registers.general[2].toInt() and 0xFF,
+//                    registers.general[3].toInt() and 0xFF
+//                )
+//            )
+
             val oldPC = registers.programCounter
             instruction.execute(registers, memory, screen, keyboard)
 
@@ -85,6 +97,7 @@ class CPU(
 
     private fun decrementTimer() {
         registers.timer.getAndUpdate { t -> if (t > 0) t - 1 else t }
+//        println("decrementTimer is being run")
     }
 
 
